@@ -37,7 +37,7 @@ index cb4bc5e..07000b6 100644
 +      {
 +        var numLevels = $('.section_menu_append_target').children().length;
 +        var sectionElement = $('.section_menu_item.selected');
-+        var levelId = sectionElement.index() + 1;
++        var levelId = String(sectionElement.index() + 1);
 +        var sectionTitle = sectionElement.text();
 +        
 +        if (!sectionTitle.endsWith(" ✅"))
