@@ -1,0 +1,3 @@
+[submodule "openvim"]
+	path = openvim
+	url = https://github.com/egaga/openvim.git
