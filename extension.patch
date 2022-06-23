@@ -1,5 +1,5 @@
 diff --git a/js/tutorial/sections.js b/js/tutorial/sections.js
-index f7cd4cd..9527574 100644
+index f7cd4cd..550c671 100644
 --- a/js/tutorial/sections.js
 +++ b/js/tutorial/sections.js
 @@ -17,6 +17,21 @@ function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, re
@@ -12,11 +12,11 @@ index f7cd4cd..9527574 100644
 +        var numLevels = $('.section_menu_append_target').children().length;
 +        var sectionElement = $('.section_menu_item.selected');
 +        var levelId = sectionElement.index() + 1;
-+        var sectionTitle = sectionElement.text()
++        var sectionTitle = sectionElement.text();
 +        
-+        if (!sectionTitle.endsWith(" Γ£à"))
++        if (!sectionTitle.endsWith(" ✅"))
 +        {
-+          sectionElement.text(sectionTitle + " Γ£à");
++          sectionElement.text(sectionTitle + " ✅");
 +        }
 +        
 +        ScormSaveAnswer(levelId, numLevels);
@@ -25,35 +25,10 @@ index f7cd4cd..9527574 100644
  
    function defaultPre() { interpreter.environment.setInsertMode(); }
 diff --git a/js/tutorial/tutorial_engine.js b/js/tutorial/tutorial_engine.js
-index cb4bc5e..759ff4b 100644
+index cb4bc5e..07000b6 100644
 --- a/js/tutorial/tutorial_engine.js
 +++ b/js/tutorial/tutorial_engine.js
-@@ -4,6 +4,24 @@ function createTutorial(context, interpreter, messager, doc) {
-   var tutorial_sections = [];
- 
-   function createSection(name, preFun, paragraphs, postFun) {
-+      
-+    if (API != null)
-++   {
-+        var sd = ScormProcessGetValue("cmi.suspend_data");
-+        
-+        if (sd != null)
-+        {
-+            var sectionElement = $('.section_menu_item.selected');
-+            var levelId = String(sectionElement.index() + 1);
-+            
-+            var sd_arr = sd.split(",");
-+            if (sd_arr.includes(levelId))
-+            {
-+                name = name + " Γ£à";
-+            }
-+        }
-+    }
-+      
-     return {
-       'name': name,
-       'paragraphs': paragraphs,
-@@ -19,6 +37,22 @@ function createTutorial(context, interpreter, messager, doc) {
+@@ -19,6 +19,22 @@ function createTutorial(context, interpreter, messager, doc) {
    function showCommandOneByOne(commands, userInputAccepterCreator) {
      if(commands.length === 0) {
        sendMessageAsync('tutorial_next_section');
@@ -63,11 +38,11 @@ index cb4bc5e..759ff4b 100644
 +        var numLevels = $('.section_menu_append_target').children().length;
 +        var sectionElement = $('.section_menu_item.selected');
 +        var levelId = sectionElement.index() + 1;
-+        var sectionTitle = sectionElement.text()
++        var sectionTitle = sectionElement.text();
 +        
-+        if (!sectionTitle.endsWith(" Γ£à"))
++        if (!sectionTitle.endsWith(" ✅"))
 +        {
-+          sectionElement.text(sectionTitle + " Γ£à");
++          sectionElement.text(sectionTitle + " ✅");
 +        }
 +        
 +        ScormSaveAnswer(levelId, numLevels);
@@ -76,15 +51,54 @@ index cb4bc5e..759ff4b 100644
        return;
      }
  
+@@ -57,6 +73,23 @@ function createTutorial(context, interpreter, messager, doc) {
+     G.for_each_indexed(G.reverse(tutorial_sections), function(section, index) {
+       var sectionNumber = tutorial_sections.length - index - 1;
+       var sectionName = (1 + sectionNumber) + ". " + section.name;
++
++      if (API != null)
++      {
++          var sd = ScormProcessGetValue("cmi.suspend_data");
++          
++          if (sd != null)
++          {
++              var levelId = String(1 + sectionNumber);
++              
++              var sd_arr = sd.split(",");
++              if (sd_arr.includes(levelId))
++              {
++                  sectionName = sectionName + " ✅";
++              }
++          }
++      }
++      
+       var $section = $('<div />',
+           { 'class': 'section_menu_item',
+             'number': sectionNumber,
 diff --git a/tutorial.html b/tutorial.html
-index e54613a..efe90e4 100644
+index e54613a..fe74a55 100644
 --- a/tutorial.html
 +++ b/tutorial.html
-@@ -49,21 +49,11 @@
-       }
+@@ -4,6 +4,7 @@
+ 
+ <head>
+   <meta charset='utf-8' />
++  <script src="js/scorm.js" type="text/javascript"></script>
+   <link rel="stylesheet" type="text/css" href="css/css.css?version={VERSION}" />
+   <link rel="stylesheet" type="text/css" href="css/tutorial.css?version={VERSION}" />
+   <link rel="stylesheet" type="text/css" href="css/virtual_keyboard.css?version={VERSION}" />
+@@ -38,6 +39,8 @@
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+     google.load("jquery", "1.6.4");
++    
++    ScormProcessInitialize();
+ 
+     const urlParams = new URLSearchParams(window.location.search);
+ 
+@@ -50,20 +53,9 @@
      });
    </script>
-+  <script src="js/scorm.js" type="text/javascript"></script>
  
 -  <script type="text/javascript">
 -    var _gaq = _gaq || [];
@@ -100,7 +114,7 @@ index e54613a..efe90e4 100644
  </head>
  
 -<body>
-+<body onload="ScormProcessInitialize(); openNav();" onbeforeunload="ScormProcessTerminate();" onunload="ScormProcessTerminate();">
++<body onload="openNav();" onbeforeunload="ScormProcessTerminate();" onunload="ScormProcessTerminate();">
    <div id="main">
  
      <div class="navigation">
