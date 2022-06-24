@@ -5,7 +5,9 @@ site:
 	cp js/virtual_keyboard.js js/virtual_keyboard-pl.js && \
 	cp js/view/context_help.js js/view/context_help-pl.js && \
 	cp js/view/view.js js/view/view-pl.js && \
+	cp js/tutorial/init_tutorial.js js/tutorial/init_tutorial-pl.js && \
 	cp js/tutorial/sections.js js/tutorial/sections-pl.js && \
+	cp css/tutorial.css css/tutorial-pl.css && \
 	cp sandbox.html sandbox-pl.html && \
 	cp tutorial.html tutorial-pl.html && \
 	patch -p1 -i ../translation.patch && \

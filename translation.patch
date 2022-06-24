@@ -1,6 +1,33 @@
+diff -ur en/css/tutorial-pl.css pl/css/tutorial-pl.css
+--- en/css/tutorial-pl.css	2022-06-24 19:17:40.638473300 +0200
++++ pl/css/tutorial-pl.css	2022-06-24 21:05:44.773559000 +0200
+@@ -44,7 +44,7 @@
+ .section_menu_item {
+     font-family: monospace;
+     color: #555;
+-    width: 300px;
++    width: 330px;
+     padding: 5px;
+     margin:  3px;
+     float: left;
+diff -ur en/js/tutorial/init_tutorial-pl.js pl/js/tutorial/init_tutorial-pl.js
+--- en/js/tutorial/init_tutorial-pl.js	2022-06-24 19:17:40.739603500 +0200
++++ pl/js/tutorial/init_tutorial-pl.js	2022-06-24 21:42:48.924857700 +0200
+@@ -45,9 +45,9 @@
+         } else if(code === "#") {
+           keyboard.addClass('waiting_to_be_pressed', 'shift');
+           keyboard.addClass('waiting_to_be_pressed', '3');
+-        } else if(code === '/') {
++        } else if(code === '*') {
+           keyboard.addClass('waiting_to_be_pressed', 'shift');
+-          keyboard.addClass('waiting_to_be_pressed', '7');
++          keyboard.addClass('waiting_to_be_pressed', '8');
+         } else if(code === '%') {
+           keyboard.addClass('waiting_to_be_pressed', 'shift');
+           keyboard.addClass('waiting_to_be_pressed', '5');
 diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
 --- en/js/tutorial/sections-pl.js	2022-06-24 19:17:40.739603500 +0200
-+++ pl/js/tutorial/sections-pl.js	2022-06-24 19:17:40.739603500 +0200
++++ pl/js/tutorial/sections-pl.js	2022-06-24 21:54:02.223413900 +0200
 @@ -1,7 +1,7 @@
  function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, registerSection, showCommandOneByOne, doc) {
    var G = VIM_GENERIC;
@@ -19,7 +46,7 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
                messager.removeListener('pressed_key', forAbortId);
            }
        });
-@@ -93,14 +93,14 @@
+@@ -93,24 +93,24 @@
        interpreter.environment.setMode(mode);
      }
  
@@ -39,7 +66,441 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
 +        "A teraz pozwól, że pokażę Ci podstawy Vima."
      ], defaultPost);
  
-     var two_modes_section = createSection("Two modes, insert and normal",
+-    var two_modes_section = createSection("Two modes, insert and normal",
++    var two_modes_section = createSection("Dwa tryby, INSERT i NORMAL",
+         defaultPre,
+     [
+-        "Vim has two basic modes. One is |insert| mode, in which you write text as if in normal text editor.",
+-        "Another is |normal| mode which provides you efficient ways to navigate and manipulate text.",
+-        "At any time, you can see which mode you are in on the status bar which is located at the top of the editor.",
+-        "To change between modes, use |Esc| for normal mode and |i| for insert mode",
+-        "Let's try it out! First, change to insert mode."
++        "Vim ma dwa podstawowe tryby pracy. Jednym z nich jest tryb |INSERT| (wprowadzanie), w którym pisze się tekst tak, jak w normalnym edytorze tekstu.",
++        "Drugi tryb to |NORMAL| (zwykły), który zapewnia efektywne sposoby nawigacji i manipulacji tekstem.",
++        "W każdej chwili możesz sprawdzić, w którym trybie jesteś, patrząc na pasek stanu znajdującym ię w górnej części edytora.",
++        "Aby przełączać się między trybami, użyj |Esc| dla trybu NORMAL oraz |i| dla trybu INSERT.",
++        "Sprawdźmy, jak to działa! Najpierw przejdź do trybu wstawiania."
+     ],
+     function() {
+         interpreter.environment.setCommandMode();
+@@ -118,12 +118,12 @@
+             [
+              cmd("i", function() {
+                $('.screen_view').addClass('active_context');
+-               insertText("Good, now you're in insert mode. Write something and change back to normal mode.");
++               insertText("Świetnie, teraz jesteś w trybie wstawiania. Napisz coś i wróć do trybu zwykłego.");
+              }),
+              cmd("Esc", function() {
+                $('.screen_view').removeClass('active_context');
+                interpreter.environment.interpretOneCommand("G");
+-               insertText("Good. Let's move on to another section.");
++               insertText("Dobrze. Przejdźmy do następnej sekcji.");
+              }),
+              "Enter"
+             ],
+@@ -131,89 +131,89 @@
+     }
+     );
+ 
+-    var basic_movement = createSection("Basic movement: h, j, k, and l",
++    var basic_movement = createSection("Podstawowe ruchy: h, j, k oraz l",
+         defaultPre,
+     [
+-        "In contrast to regular text editor, you use keys |h|, |j|, |k|, and |l| instead of arrow keys to move the cursor.",
+-        "Let's see how it works in practice!"
++        "W przeciwieństwie do zwykłego edytora tekstu, zamiast klawiszy strzałek, do przesuwania kursora używa się klawiszy |h|, |j|, |k| i |l|.",
++        "Zobaczmy, jak to działa w praktyce!"
+     ], function() {
+         interpreter.environment.setCommandMode();
+         showCommandOneByOne([
+           "h", "h", "h", "k", "l", "l", "h", "h", "j",
+           cmd("Enter", function() {
+-            insertText("Let's move on.");
++            insertText("Przejdźmy dalej.");
+           }), "Enter"],
+           accepterCreator);
+     });
+ 
+-    var word_movement = createSection("Word movement: w, e, b",
++    var word_movement = createSection("Ruch po wyrazach: w, e, b",
+         defaultPre,
+       [
+-        "To navigate the text in terms of words, you can use keys |w|, |b|, and |e| (also W, B, E in real Vim).",
+-        "|w| moves to the start of next word; |e| moves to the end of the word; and |b| moves to beginning of the word."
++        "Aby poruszać się po tekście nie tyle co po poszczególnych znakach, ale po całych wyrazach, można użyć klawiszy |w|, |b| i |e| (oraz W, B, E w prawdziwym Vimie).",
++        "|w| przenosi na początek następnego wyrazu; |e| przenosi na koniec wyrazu; a |b| przenosi na początek wyrazu."
+       ], function() {
+         interpreter.environment.setCommandMode();
+         showCommandOneByOne([
+           "b", "b", "w", "b", "e", "w",
+           cmd("Enter", function() {
+-            insertText("Word! Let's move on.");
++            insertText("Uwaga! Idziemy dalej.");
+           }), "Enter"],
+           accepterCreator);
+     });
+ 
+-    var times_movement = createSection("Number powered movement, e.g. 5w",
++    var times_movement = createSection("Ruch napędzany liczbą, np. 5w",
+       defaultPre,
+       [
+-          "Moving within the text is not limited to individual keys; you can combine movement keys with a |number|. For example, |3w| is the same as pressing w three times."
++          "Poruszanie się w tekście nie jest ograniczone do pojedynczych klawiszy; można łączyć klawisze poruszania się z |liczbą|. Na przykład |3w| to to samo, co trzykrotne naciśnięcie klawisza w."
+       ],
+       function() {
+         interpreter.environment.setCommandMode();
+         interpreter.interpretSequence("0");
+         showCommandOneByOne(["3", "w", "9", "l", "2", "b",
+-            cmd("Enter", function() { insertText("With numbers, ain't no numbness.") }),
++            cmd("Enter", function() { insertText("Z liczbami trzeba się liczyć.") }),
+             "Enter"
+         ],
+         accepterCreator)
+       });
+ 
+-    var times_inserting = createSection("Insert text repeatedly, e.g. 3iYes",
++    var times_inserting = createSection("Wstaw tekst wielokrotnie, np. 3iTak",
+         defaultPre,
+         [
+-            "You can insert text multiple times.",
+-            "For example, an underline of a header might consist of 30 |-|s.",
++            "Tekst można wstawiać wielokrotnie.",
++            "Na przykład podkreślenie nagłówka może składać się z 30 |-|.",
+             "------------------------------",
+-            "With |30i-| |Esc|, there's no need to press |-| 30 times.",
+-            "Let's try it out: insert |go| three times."
++            "Dzięki |30i-| |Esc| nie trzeba naciskać klawisza |-| 30 razy.",
++            "Wypróbujmy to: wstaw |go| trzy razy."
+         ],
+         function() {
+             interpreter.environment.setCommandMode();
+             showCommandOneByOne(
+                 ["3", "i", "g", "o", "Esc",
+-                cmdWithText("Enter", "See? 10iAll work is only playEsc."),
++                cmdWithText("Enter", "Widzisz? 10iCała praca to tylko zabawaEsc."),
+                 "Enter"
+                 ], accepterCreator)
+         });
+ 
+-    var find_occurrence = createSection("Find a character, f and F",
++    var find_occurrence = createSection("Znajdź znak, f oraz F",
+         defaultPre,
+         [
+-            "To find and move to the next (or previous) occurrence of a character, use |f| and |F|, e.g. |fo| finds next o.",
+-            "You can combine f with a number. For example, you can find 3rd occurrence of 'q' with |3fq|, que?"
++            "Aby znaleźć i przejść do następnego (lub poprzedniego) wystąpienia znaku, użyj |f| i |F|, np. |fo| znajduje następne o.",
++            "Można połączyć f z liczbą. Na przykład, możesz znaleźć trzecie wystąpienie 'q' używając |3fq|, que?"
+         ],
+         function() {
+           interpreter.environment.setCommandMode();
+           interpreter.interpretSequence("0");
+           showCommandOneByOne(["f", "w", "f", "s", "3", "f", "q",
+-              cmd("Enter", function() { insertText("F-f-f-ast!") }),
++              cmd("Enter", function() { insertText("F-f-f-16!") }),
+               "Enter"
+           ], accepterCreator)
+         });
+ 
+-    var matching_parentheses = createSection("Go to matching parentheses, %",
++    var matching_parentheses = createSection("Idź do odpowiadających nawiasów, %",
+       defaultPre,
+       [
+-        "In text that is structured with parentheses or brackets, |(| or |{| or |[|, use |%| to jump to the matching parenthesis or bracket.",
+-        "Here is (a sample) text to try that."
++        "W tekście zawierającym nawiasy lub klamry, |(| lub |{| lub |[|, użyj |%|, aby przejść do pasującego nawiasu.",
++        "Poniżej znajduje się (przykładowy) tekst do przetestowania."
+       ],
+       function() {
+         interpreter.environment.setCommandMode();
+@@ -221,85 +221,86 @@
+         showCommandOneByOne(["%", "%", "Enter"], accepterCreator)
+       });
+ 
+-    var start_and_end_of_line = createSection("Go to start/end of line, 0 and $",
++    var start_and_end_of_line = createSection("Idź na początek/koniec linii, 0 i $",
+       defaultPre,
+       [
+-        "To reach the beginning of a line, press |0|.",
+-        "For the end of a line, there's |$|"
++        "Aby przejść na początek linii, naciśnij |0|.",
++        "Natomiast by przejść na koniec linii, naciśnij |$|."
+       ],
+       function() {
+         interpreter.environment.setCommandMode();
+         showCommandOneByOne(["0", "$", "0", "Enter"], accepterCreator)
+       });
+ 
+-    var word_under_cursor = createSection("Find word under cursor, * and #",
++    var word_under_cursor = createSection("Znajdź wyraz pod kursorem, * i #",
+       defaultPre,
+         [
+-         "Find the next occurrence of the word under cursor with |*|, and the previous with |#|."
++         "Szukamy wyrazu teraz! Znajdź następne wystąpienie wyrazu będącego pod kursorem za pomocą |*|, a poprzednie występienie wyrazu za pomocą |#|."
+         ],
+         function() {
+           interpreter.environment.setCommandMode();
+           interpreter.interpretSequence(["0", "w"]);
+           showCommandOneByOne(["*", "*", "#",
+               cmd("#", function() {
+-                insertText("Nothing new under the cursor.")
++                insertText("Nic nowego pod kursorem.")
+               }), "Enter"], accepterCreator)
+         });
+ 
+-    var goto_line = createSection("Goto line, g and G",
++    var goto_line = createSection("Idź do linii, g oraz G",
+         defaultPre,
+         [
+-         "|gg| takes you to the beginning of the file; |G| to the end.",
+-         "To jump directly to a specific line, give its |line number| along with |G|.",
+-         "Now go to the beginning of this screen with |gg| and then back to end with |G|."
++         "|gg| przenosi użytkownika na początek pliku; |G| na koniec.",
++         "Aby przejść bezpośrednio do określonego wiersza, należy podać jego numer wraz z literą |G|.",
++         "Teraz przejdź na początek ekranu, wpisując |gg|, a następnie wróć na koniec, wpisując |G|."
+         ],
+         function() {
+           interpreter.environment.setCommandMode();
+           showCommandOneByOne(["g", "g", "G",
+              cmd("Enter", function() {
+-                 insertText("Go to line 2 with 2G.");
++                 insertText("Przejdź do linii 2 przy pomocy 2G.");
+              }),
+              "2", "G",
+              cmd("Enter", function() {
+-                insertText("gg! G majorly rocks.")
++                insertText("gg! G naprawdę daje czadu.")
+              }), "Enter"
+           ], accepterCreator)
+         });
+ 
+-    var search_match = createSection("Search, /text with n and N",
++    var search_match = createSection("Wyszukaj, /tekst z n oraz N",
+       defaultPre,
+       [
+-        "Searching text is a vital part of any text editor. In Vim, you press |/|, and give the text you are looking for.",
+-        "You can repeat the search for next and previous occurrences with |n| and |N|, respectively.",
+-        "For advanced use cases, it's possible to use regexps that help to find text of particular form (In real Vim).",
+-        "Let's try a simple text search.",
+-        "Search for |text| and find the subsequent matches with |n|."
++        "Przeszukiwanie tekstu jest istotną częścią każdego edytora tekstu. W Vimie naciskamy |/| i podajemy szukany tekst.",
++        "Wyszukiwanie można powtórzyć dla następnych i poprzednich wystąpień, używając odpowiednio |n| i |N|.",
++        "W bardziej wymagających przypadkach możesz użyć wyrażeń regularnych (działają w prawdziwym Vimie), które pomagają znaleźć tekst o określonej postaci.",
++        "Spróbujmy przeprowadzić proste wyszukiwanie tekstu.",
++        "Wyszukaj |tekst| i znajdź kolejne dopasowania z |n|.",
++        "Uwaga! W niektórych przeglądarkach internetowych, gdy wciśniesz |/| włączy się tryb przeszukiwania strony - jeśli taki tryb się włączy, to go zamknij i wróć do tego samouczka."
+       ],
+       function() {
+         interpreter.environment.setCommandMode();
+         interpreter.interpretSequence("1G");
+         showCommandOneByOne(
+-          ["/", "t", "e", "x", "t", "Enter", "n", "n", "N", "N",
++          ["/", "t", "e", "k", "s", "t", "Enter", "n", "n", "N", "N",
+           cmd("Enter",
+             function() {
+               interpreter.interpretSequence(["/", "Esc"]);
+-              insertText("Slash through the needles with /n/e/e/d/l/e/s");
++              insertText("Dziel i rządź przy pomocy /d/z/i/e/l");
+             }),
+           "Enter"], accepterCreator
+         )
+       });
+ 
+-    var removing = createSection("Removing a character, x and X",
++    var removing = createSection("Usuń znak, x oraz X",
+         defaultPre,
+       [
+-      "|x| and |X| delete the character under the cursor and to the left of the cursor, respectively",
+-      "Try pressing |x| to remove the last word."
++      "|x| i |X| usuwają znak, odpowiednio, pod kursorem i po lewej stronie kursora.",
++      "Spróbuj nacisnąć klawisz |x|, aby usunąć ostatnie słowo."
+       ], function() {
+         interpreter.environment.setCommandMode();
+         showCommandOneByOne([
+-          "x", "x", "x", "x", "x",
++          "x", "x", "x", "x", "x", "x",
+           cmd("x", function() {
+-             insertText("Sometimes the treasure is the indicator (x).");
++             insertText("Czasami niewiadoma (x) może zamienić się w prawdziwy skarb.");
+           }),
+             /*
+           "X", "X", "X", "X", "X",
+@@ -311,11 +312,11 @@
+           accepterCreator);
+     });
+ 
+-    var replacing = createSection("Replacing letter under cursor, r",
++    var replacing = createSection("Zastąp literę pod kursorem, r",
+         defaultPre,
+       [
+-      "When you need to replace only one character under your cursor, without changing to insert mode, use |r|.",
+-      "Replace my"
++      "Jeśli chcesz zastąpić tylko jeden znak pod kursorem, bez przechodzenia do trybu wstawiania, użyj |r|.",
++      "Zastąp mniy"
+       ], function() {
+         interpreter.environment.setCommandMode();
+         interpreter.interpretSequence("Fy");
+@@ -333,12 +334,12 @@
+     function setActiveContext() { $('.screen_view').addClass('active_context'); }
+     function unsetActiveContext() { $('.screen_view').removeClass('active_context'); }
+ 
+-    var adding_line = createSection("Insert new line, o and O",
++    var adding_line = createSection("Wstaw nową linię, o oraz O",
+       defaultPre,
+         [
+-            "To insert text into a new line, press |o| or |O|",
+-            "After new line is created, the editor is set to |insert| mode.",
+-            "Write a bit and get back to |normal| mode."
++            "Aby wstawić tekst do nowej linii, naciśnij |o| lub |O|.",
++            "Po utworzeniu nowej linii, edytor przechodzi w tryb |INSERT|.",
++            "Dopisz jakiś fragment tekstu i wróć do trybu |NORMAL|."
+         ], function() {
+             interpreter.environment.setCommandMode();
+             interpreter.interpretSequence(["2", "G"]);
+@@ -348,46 +349,46 @@
+                 }),
+                 cmd("Esc", function() {
+                     unsetActiveContext();
+-                    insertText("Yep! Now big O to insert new line above the current line.");
++                    insertText("Taaak! A teraz duże O by wstawić nową linię nad bieżącą linią.");
+                     interpreter.environment.setCommandMode();
+                 }),
+                 cmd("O", setActiveContext),
+                 cmd("Esc",
+                     function() {
+-                        insertText("I bet you feel like O___o");
++                        insertText("Założę się, że czujesz się teraz tak: O___o");
+                         unsetActiveContext();
+                     }), "Enter"
+             ], accepterCreator)
+         });
+ 
+-    var deleting = createSection("Deleting, d",
++    var deleting = createSection("Usuń, d",
+         defaultPre,
+       [
+-      "|d| is the delete command",
+-      "You can combine it with movement, e.g. |dw| deletes the first word on the right side of the cursor",
+-      "It also copies the content, so that you can paste it with |p| to another location (on real Vim)."
++      "|d| to polecenie usuwania.",
++      "Można je połączyć z ruchem, np. |dw| usuwa pierwsze słowo po prawej stronie kursora.",
++      "Natomiast w prawdziwym Vimie kopiuje ono również zawartość, dzięki czemu za pomocą |p| można ją wkleić do innej lokalizacji."
+       ], function() {
+         interpreter.environment.setCommandMode();
+         interpreter.environment.interpretOneCommand("0");
+         showCommandOneByOne([
+           "d", "w",
+           cmd("Enter", function() {
+-            insertText("The word is gone. Now let's remove two words with d2e.");
++            insertText("Słowo zostało usunięte. Teraz usuńmy dwa słowa za pomocą d2e.");
+             interpreter.environment.interpretSequence(["0"]);
+           }),
+           "d", "2", "e",
+           cmd("Enter", function() {
+-            insertText("To 'de' or not to 'de', is not the question, anymore.");
++            insertText("Niezły z Ciebie ko 'de' r!");
+           }), "Enter"],
+           accepterCreator);
+     });
+ 
+-  var repetition = createSection("Repetition with .",
++  var repetition = createSection("Powtórz z .",
+     defaultPre,
+     [
+-        "To repeat the previous command, just press |.|",
+-        "First, remove two words with |d2w|.",
+-        "After that, remove the rest of the words in this line with |.|"
++        "Aby powtórzyć poprzednie polecenie, wystarczy nacisnąć |.|.",
++        "Najpierw należy usunąć dwa słowa za pomocą |d2w|.",
++        "Następnie usuń pozostałe słowa w tym wierszu za pomocą |.|."
+     ],
+       function() {
+         interpreter.environment.setCommandMode();
+@@ -396,62 +397,62 @@
+             "d", "2",
+             "w", ".", ".", ".", ".", ".",
+           cmd("Enter", function() {
+-            insertText("Repetition is the root of all periods.")
++            insertText("Powtarzanie jest podstawą wszystkich cykli.")
+           }),
+             "Enter"
+         ], accepterCreator)
+       });
+ 
+-  var visual_mode = createSection("Visual mode, v",
++  var visual_mode = createSection("Tryb wizualny, v",
+     defaultPre,
+     [
+-      "Besides insert and normal mode, Vim has also |visual| mode.",
+-      "In visual mode, you select text using movement keys before you decide what to do with it.",
+-      "Let's see how. Goto visual mode with |v|. Then select a word with |e|. After you've selected the text, you can delete it with |d|.",
+-      "This sentence has not seen the light."
++      "Oprócz trybu wstawiania i trybu normalnego, Vim posiada również tryb |VISUAL| (wizualny).",
++      "W trybie wizualnym, najpierw zaznaczasz tekst za pomocą klawiszy ruchu, zanim zdecydujesz co z nim zrobić.",
++      "Sprawdźmy, jak to zrobić. Przejdź do trybu wizualnego za pomocą |v|. Następnie zaznacz słowo za pomocą |e|. Po zaznaczeniu tekstu możesz go usunąć, używając klawisza |d|.",
++      "To zdanie nie ujrzało światła dziennego."
+     ],
+     function() {
+       interpreter.environment.setCommandMode();
+       interpreter.interpretSequence("4b");
+       showCommandOneByOne(
+         ["v", "e", "l", "d",
+-          cmdWithText("Enter", "(Visually gifted, I lost my words.)"), "Enter"
++          cmdWithText("Enter", "(Po nabyciu umiejętności wizualnych, zabrakło mi słów)."), "Enter"
+         ], accepterCreator)
+     });
+ 
+-  var visual_block_mode = createSection("Visual block mode, ctrl-v",
++  var visual_block_mode = createSection("Wizualny tryb blokowy, ctrl-v",
+     defaultPre,
+     [
+-      "There is yet another mode: |visual block|. This makes it possible to insert text on many lines at once. Let's see how with an example list.",
+-      "<> A smart girl",
+-      "<> Ulysses",
+-      "<> Learn and teach",
+-      "First, move cursor to insert position. Then press |ctrl-v| to go into visual block mode. Move cursor vertically to select lines. Now press |I|, and prepend text to the selected area. |Esc| completes the insertion."
++      "Istnieje jeszcze jeden tryb: |VISUAL BLOCK| (wizualny tryb blokowy). Umożliwia on wstawianie tekstu w wielu wierszach jednocześnie. Zobaczmy, jak to zrobić na przykładzie listy.",
++      "<> Bystra dziewczyna",
++      "<> Ulisses",
++      "<> Ucz się i nauczaj",
++      "Najpierw przesuń kursor na pozycję wstawiania. Następnie naciśnij |ctrl-v|, aby przejść do trybu bloku wizualnego. Przesuń kursor w pionie, aby zaznaczyć linie. Teraz naciśnij |I| i wstaw tekst do zaznaczonego obszaru. |Esc| kończy wstawianie."
+     ],
+     function() {
+       interpreter.environment.setCommandMode();
+       interpreter.interpretSequence("2G");
+       showCommandOneByOne(["l", "ctrl-v", "j", "j", "I", "o", "Esc",
+-        cmdWithText("Enter", "Blocks are obstacles for making progress."), "Enter"],
++        cmdWithText("Enter", "Blok-ady nie są przeszkodą na drodze rozwoju."), "Enter"],
+         accepterCreator);
+     });
+ 
+-  var last_commands = createSection("Real Vim awaits",
++  var last_commands = createSection("Prawdziwy Vim czeka",
+         defaultPre,
+     [
+-        "Now you should be quite confident to enter the real Vim.",
+-        "Most important commands to remember are |:w| (save), |:q| (quit), and |:q!| (quit without saving).",
+-        "Also don't |PANIC!| If you make a mistake, press |u| for undo and |ctrl+R| for redo",
+-        "If you have a problem, or want to learn more about what Vim offers, type |:help|"
++        "Teraz powinieneś móc wejść na pewniaczku do prawdziwego Vima.",
++        "Najważniejsze polecenia, które powinieneś zapamiętać, to |:w| (zapisz), |:q| (zakończ) i |:q!| (zakończ bez zapisywania).",
++        "Ponadto, nie |PANIKUJ!| Jeśli popełnisz błąd, naciśnij |u| aby cofnąć polecenie i |ctrl+R| aby ponowić polecenie.",
++        "Jeśli masz jakiś problem lub chcesz dowiedzieć się więcej o możliwościach Vima, wpisz |:help|."
+     ],
+         defaultPost
+     );
+ 
+-  var the_end = createSection("The end", defaultPre,
++  var the_end = createSection("Zakończenie", defaultPre,
+       [
+-        "Thank you for your time. I hope you enjoyed.",
+-        "Press |space| if you want to test out the commands freely in the practice editor.",
+-        "Bye!"
++        "Dzięki za poświęcony czas. Mam nadzieję, że się podobało.",
++        "Naciśnij |space|, jeśli chcesz swobodnie potestować polecenia w edytorze treningowym.",
++        "Narka!"
+       ], () => waitPressToGotoPractice('Space', 32));
+ 
+   // append a and A
 diff -ur en/js/view/context_help-pl.js pl/js/view/context_help-pl.js
 --- en/js/view/context_help-pl.js	2022-06-24 19:17:40.760738700 +0200
 +++ pl/js/view/context_help-pl.js	2022-06-24 19:41:22.942322600 +0200
@@ -150,23 +611,39 @@ diff -ur en/js/view/view-pl.js pl/js/view/view-pl.js
      var row = 1 + executor.currentRowIndex();
 diff -ur en/js/virtual_keyboard-pl.js pl/js/virtual_keyboard-pl.js
 --- en/js/virtual_keyboard-pl.js	2022-06-24 19:17:40.760738700 +0200
-+++ pl/js/virtual_keyboard-pl.js	2022-06-24 19:34:54.458404900 +0200
-@@ -31,9 +31,9 @@
++++ pl/js/virtual_keyboard-pl.js	2022-06-24 21:32:19.086815200 +0200
+@@ -31,19 +31,19 @@
     // TODO setKeyLayout to a separate file that returns properties for each keyboard layout
    function setKeyLayout() {
      escRow = ["Esc", 'hid', 'hid', 'hid', 'hid', 'hid', 'hid',
 -      configurationKey('3d', 'toggle_3d_keyboard'),
 -      configurationKey('Screen brightness', 'toggle_screen_brightness'),
 -      configurationKey('Keyboard size', 'toggle_keyboard_size') ];
+-    numberRow = ['hid', two('1', '!'), two('2', '"'),
 +      configurationKey('3D', 'toggle_3d_keyboard'),
 +      configurationKey('Jasność ekranu', 'toggle_screen_brightness'),
 +      configurationKey('Rozmiar klaw.', 'toggle_keyboard_size') ];
-     numberRow = ['hid', two('1', '!'), two('2', '"'),
++    numberRow = ['hid', two('1', '!'), two('2', '@'),
        two('3', '#'), two('4', '$'), two('5', '%'),
-       two('6', '&'), two('7', '/'), two('8', '('),
+-      two('6', '&'), two('7', '/'), two('8', '('),
+-      two('9', ')'), two('0', '=')];
++      two('6', '^'), two('7', '&'), two('8', '*'),
++      two('9', '('), two('0', ')')];
+ 
+     // TODO: replace this with the ability to load configs from file
+     if (layout === 'qwerty') {
+-      tabRow = ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', {key: 'Backspace', label: '<='}];
+-      capslockRow = ['caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', '*', 'Enter'];
+-      shiftRow = ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', two('>', '<')];
++      tabRow = ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', {key: 'Backspace', label: '⌫'}];
++      capslockRow = ['caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', two(';', ':'), 'Enter'];
++      shiftRow = ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', two(',', '<'), two('.', '>'), two('/', '?')];
+       bottomRow = ['ctrl', 'alt', 'Space'];
+     } else if (layout === 'dvorak') {
+       tabRow = ['tab', {primary: ',', secondary: '<'}, {primary: '.', secondary: '>'}, 'p', 'y', 'f', 'u', 'g', 'c', 'r', 'l', {key: 'Backspace', label: '<='}];
 diff -ur en/sandbox-pl.html pl/sandbox-pl.html
 --- en/sandbox-pl.html	2022-06-24 19:17:40.776376200 +0200
-+++ pl/sandbox-pl.html	2022-06-24 19:42:03.567543600 +0200
++++ pl/sandbox-pl.html	2022-06-24 19:45:57.884143600 +0200
 @@ -1,12 +1,12 @@
  <!doctype html>
  
@@ -243,9 +720,9 @@ diff -ur en/sandbox-pl.html pl/sandbox-pl.html
          <p class="command-mode"></p>
          <p class="insert-mode"></p>
 diff -ur en/tutorial-pl.html pl/tutorial-pl.html
---- en/tutorial-pl.html	2022-06-24 19:17:40.792004100 +0200
-+++ pl/tutorial-pl.html	2022-06-24 19:42:07.156457400 +0200
-@@ -1,6 +1,6 @@
+--- en/tutorial-pl.html	2022-06-24 21:06:26.636054200 +0200
++++ pl/tutorial-pl.html	2022-06-24 21:40:26.881099200 +0200
+@@ -1,16 +1,16 @@
  <!doctype html>
  
 -<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
@@ -253,7 +730,10 @@ diff -ur en/tutorial-pl.html pl/tutorial-pl.html
  
  <head>
    <meta charset='utf-8' />
-@@ -10,7 +10,7 @@
+   <script src="js/scorm.js" type="text/javascript"></script>
+   <link rel="stylesheet" type="text/css" href="css/css.css?version={VERSION}" />
+-  <link rel="stylesheet" type="text/css" href="css/tutorial.css?version={VERSION}" />
++  <link rel="stylesheet" type="text/css" href="css/tutorial-pl.css?version={VERSION}" />
    <link rel="stylesheet" type="text/css" href="css/virtual_keyboard.css?version={VERSION}" />
    <link rel="icon" type="image/png" href="icon.png" />
  
@@ -277,7 +757,7 @@ diff -ur en/tutorial-pl.html pl/tutorial-pl.html
    <script type="text/Javascript" src="js/commands/searchcommands.js?version={VERSION}"></script>
    <script type="text/Javascript" src="js/commands/visualcommands.js?version={VERSION}"></script>
    <script type="text/Javascript" src="js/commands/visualblockcommands.js?version={VERSION}"></script>
-@@ -31,8 +31,8 @@
+@@ -31,10 +31,10 @@
    <script type="text/Javascript" src="js/commands/commands.js?version={VERSION}"></script>
    <script type="text/Javascript" src="js/view/event.js?version={VERSION}"></script>
    <script type="text/Javascript" src="js/tutorial/tutorial_engine.js?version={VERSION}"></script>
@@ -286,8 +766,11 @@ diff -ur en/tutorial-pl.html pl/tutorial-pl.html
 +  <script type="text/Javascript" src="js/tutorial/sections-pl.js?version={VERSION}"></script>
 +  <script type="text/Javascript" src="js/virtual_keyboard-pl.js?version={VERSION}"></script>
  
-   <script type="text/Javascript" src="js/tutorial/init_tutorial.js?version={VERSION}"></script>
+-  <script type="text/Javascript" src="js/tutorial/init_tutorial.js?version={VERSION}"></script>
++  <script type="text/Javascript" src="js/tutorial/init_tutorial-pl.js?version={VERSION}"></script>
  
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type="text/javascript">
 @@ -60,9 +60,9 @@
  
      <div class="navigation">
@@ -328,3 +811,14 @@ diff -ur en/tutorial-pl.html pl/tutorial-pl.html
      <a  href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
  
      <div class="section_menu_append_target" style="clear: both;"></div>
+@@ -110,8 +109,8 @@
+ </body>
+ <script>
+   function openNav() {
+-    document.getElementById("mySidenav").style.width = "340px";
+-    document.getElementById("main").style.marginLeft = "340px";
++    document.getElementById("mySidenav").style.width = "370px";
++    document.getElementById("main").style.marginLeft = "370px";
+   }
+ 
+   function closeNav() {
