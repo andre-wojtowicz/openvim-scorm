@@ -2,8 +2,8 @@ site:
 	@echo \* Preparing openvim website files...
 	cd openvim && \
 	git apply --whitespace=nowarn ../extension.patch && \
-    mkdir -p production && \
-    ./toproduction.sh
+	mkdir -p production && \
+	./toproduction.sh
 	@echo \* ...done
 
 scorm:
