@@ -1,7 +1,9 @@
 site:
 	@echo \* Preparing openvim website files...
 	cd openvim && \
-	git apply --whitespace=nowarn ../extension.patch
+	git apply --whitespace=nowarn ../extension.patch && \
+    mkdir -p production && \
+    ./toproduction.sh
 	@echo \* ...done
 
 scorm:
@@ -10,7 +12,7 @@ scorm:
 	mkdir dist
 	cp -r imsmanifest.xml materials dist
 	sed -i "s/Last edit: .../Last edit: $(shell date '+%Y-%m-%d %H:%M')/" dist/imsmanifest.xml
-	cp -r openvim/* dist/materials
+	cp -r openvim/production/* dist/materials
 	cd dist && \
 	zip "openvim-scorm-$(shell date '+%Y_%m_%d-%H_%M').zip" -r .
 	@echo ------------------------------------------
