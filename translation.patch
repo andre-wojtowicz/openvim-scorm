@@ -27,7 +27,7 @@ diff -ur en/js/tutorial/init_tutorial-pl.js pl/js/tutorial/init_tutorial-pl.js
            keyboard.addClass('waiting_to_be_pressed', '5');
 diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
 --- en/js/tutorial/sections-pl.js	2022-06-24 19:17:40.739603500 +0200
-+++ pl/js/tutorial/sections-pl.js	2022-06-24 21:54:02.223413900 +0200
++++ pl/js/tutorial/sections-pl.js	2022-06-24 22:00:39.032026900 +0200
 @@ -1,7 +1,7 @@
  function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, registerSection, showCommandOneByOne, doc) {
    var G = VIM_GENERIC;
@@ -63,7 +63,7 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
 +        "Jestem interaktywnym samouczkiem programu |Vim|.",
 +        "Bez zbędnych zawiłości nauczę Cię, o co chodzi w Vimie. Jeśli się spieszysz, naciśnij dowolny klawisz, aby przewinąć do przodu.",
 +        "Aby przećwiczyć to, czego się nauczyłeś, sprawdź stronę |Trening|. Znajdują się na niej informacje o poleceniach z uwzględnieniem kontekstu.",
-+        "A teraz pozwól, że pokażę Ci podstawy Vima."
++        "A teraz pozwól, że pokażę Ci podstawy Vima. Kliknij myszką na ten ekran i wciśnij |Enter|."
      ], defaultPost);
  
 -    var two_modes_section = createSection("Two modes, insert and normal",
