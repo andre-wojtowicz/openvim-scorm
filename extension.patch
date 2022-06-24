@@ -25,7 +25,7 @@ index f7cd4cd..550c671 100644
  
    function defaultPre() { interpreter.environment.setInsertMode(); }
 diff --git a/js/tutorial/tutorial_engine.js b/js/tutorial/tutorial_engine.js
-index cb4bc5e..07000b6 100644
+index cb4bc5e..d613927 100644
 --- a/js/tutorial/tutorial_engine.js
 +++ b/js/tutorial/tutorial_engine.js
 @@ -19,6 +19,22 @@ function createTutorial(context, interpreter, messager, doc) {
@@ -75,8 +75,44 @@ index cb4bc5e..07000b6 100644
        var $section = $('<div />',
            { 'class': 'section_menu_item',
              'number': sectionNumber,
+diff --git a/sandbox.html b/sandbox.html
+index 738b9e5..19dc891 100644
+--- a/sandbox.html
++++ b/sandbox.html
+@@ -39,29 +39,17 @@
+         init_vim();
+     });
+   </script>
+-
+-  <script type="text/javascript">
+-		var _gaq = _gaq || [];
+-		_gaq.push(['_setAccount', 'UA-1334187-4']);
+-		_gaq.push(['_trackPageview']);
+-
+-		(function() {
+-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+-		})();
+-  </script>
+ </head>
+ 
+ <body>
+   <div class="navigation">
+     <a href="tutorial.html">Tutorial</a>
+     <a href="sandbox.html" class="selected">Practice</a>
+-    <a href="development.html">Development</a>
++    <!-- <a href="development.html">Development</a> -->
+     <!--
+     <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.openvim.com/sandbox.html" data-text="OpenVim - Interactive Vim sandbox" data-count="horizontal" data-via="egaga">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+     -->
+-    <a class="bug_or_request" href="https://github.com/egaga/openvim/issues/new">Bugs</a>
++    <!-- <a class="bug_or_request" href="https://github.com/egaga/openvim/issues/new">Bugs</a> -->
+   </div>
+ 
+   <div style="margin-left: 15px">
 diff --git a/tutorial.html b/tutorial.html
-index e54613a..fe74a55 100644
+index e54613a..1faa87b 100644
 --- a/tutorial.html
 +++ b/tutorial.html
 @@ -4,6 +4,7 @@
@@ -96,7 +132,7 @@ index e54613a..fe74a55 100644
  
      const urlParams = new URLSearchParams(window.location.search);
  
-@@ -50,20 +53,9 @@
+@@ -50,32 +53,21 @@
      });
    </script>
  
@@ -118,3 +154,17 @@ index e54613a..fe74a55 100644
    <div id="main">
  
      <div class="navigation">
+       <span style="font-size:25px; cursor:pointer; color: white; margin: 0 10px;" onclick="openNav()">&#9776;</span>
+       <a href="tutorial.html" class="selected">Tutorial</a>
+       <a href="sandbox.html">Practice</a>
+-      <a href="development.html">Development</a>
++      <!-- <a href="development.html">Development</a> -->
+ 
+       <!--
+     <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.openvim.com/tutorial.html" data-text="OpenVim - Interactive Vim tutorial" data-count="horizontal" data-via="egaga">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+     -->
+-      <a class="bug_or_request" href="https://github.com/egaga/openvim/issues/new">Bugs</a>
++      <!-- <a class="bug_or_request" href="https://github.com/egaga/openvim/issues/new">Bugs</a> -->
+     </div>
+ 
+     <div class="screen_view">
