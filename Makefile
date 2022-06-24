@@ -2,6 +2,13 @@ site:
 	@echo \* Preparing openvim website files...
 	cd openvim && \
 	git apply --whitespace=nowarn ../extension.patch && \
+	cp js/virtual_keyboard.js js/virtual_keyboard-pl.js && \
+	cp js/view/context_help.js js/view/context_help-pl.js && \
+	cp js/view/view.js js/view/view-pl.js && \
+	cp js/tutorial/sections.js js/tutorial/sections-pl.js && \
+	cp sandbox.html sandbox-pl.html && \
+	cp tutorial.html tutorial-pl.html && \
+	patch -p1 -i ../translation.patch && \
 	mkdir -p production && \
 	./toproduction.sh
 	@echo \* ...done

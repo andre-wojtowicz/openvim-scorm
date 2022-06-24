@@ -1,0 +1,330 @@
+diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
+--- en/js/tutorial/sections-pl.js	2022-06-24 19:17:40.739603500 +0200
++++ pl/js/tutorial/sections-pl.js	2022-06-24 19:17:40.739603500 +0200
+@@ -1,7 +1,7 @@
+ function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, registerSection, showCommandOneByOne, doc) {
+   var G = VIM_GENERIC;
+ 
+-  var pressEnterToContinue = "Press enter to continue.";
++  var pressEnterToContinue = "Naciśnij Enter, aby kontynuować.";
+ 
+   function showInfo(text) { $('.info').text(text); } //.show(); }
+ 
+@@ -13,7 +13,7 @@
+       var forAbortId = messager.listenTo('pressed_key', function (key) {
+         console.log("key", key)
+           if (key === waitKey) {
+-              window.location = 'sandbox.html';
++              window.location = 'sandbox-pl.html';
+               messager.removeListener('pressed_key', forAbortId);
+           }
+       });
+@@ -93,14 +93,14 @@
+       interpreter.environment.setMode(mode);
+     }
+ 
+-  var introduction_section = createSection("Introduction",
++  var introduction_section = createSection("Wstęp",
+         defaultPre,
+     [
+-        "Hello.",
+-        "I am an interactive |Vim| tutorial.",
+-        "I'll teach you what Vim is about without hassle. If you are in a hurry, press any key to fast forward.",
+-        "To practice what you've learned, try out the |practice| page. It has a context sensitive reference for commands.",
+-        "Now, let me introduce you to basics of Vim."
++        "Hejka.",
++        "Jestem interaktywnym samouczkiem programu |Vim|.",
++        "Bez zbędnych zawiłości nauczę Cię, o co chodzi w Vimie. Jeśli się spieszysz, naciśnij dowolny klawisz, aby przewinąć do przodu.",
++        "Aby przećwiczyć to, czego się nauczyłeś, sprawdź stronę |Trening|. Znajdują się na niej informacje o poleceniach z uwzględnieniem kontekstu.",
++        "A teraz pozwól, że pokażę Ci podstawy Vima."
+     ], defaultPost);
+ 
+     var two_modes_section = createSection("Two modes, insert and normal",
+diff -ur en/js/view/context_help-pl.js pl/js/view/context_help-pl.js
+--- en/js/view/context_help-pl.js	2022-06-24 19:17:40.760738700 +0200
++++ pl/js/view/context_help-pl.js	2022-06-24 19:41:22.942322600 +0200
+@@ -25,46 +25,46 @@
+   function addCommandHelps() {
+     var insertMode = $('.insert-mode', context);
+     
+-    addCommandHelp(insertMode, "Esc", "change to normal mode");
+-    commandHelp("i, I", "change to insert mode");
+-    commandHelp("h, j, k, l", "move left, down, up, right");
+-    commandHelp("w, b, e, ge", "move word at a time");
+-    commandHelp("[n][action/movement]", "do n times, e.g. 3w");
+-    commandHelp("x, X", "remove a character");
+-    commandHelp("a, A", "append");
+-    commandHelp("f[char]", "move to next given char in line");
+-    commandHelp("F[char]", "move to previous char in line");
+-    commandHelp("; and ,", "repeat last f or F");
+-    commandHelp("f[char]", "move to n:th next given char in line", "number_f_char");
+-    commandHelp("/yourtext and then: n, N", "Search text");
+-    commandHelp("d[movement]", "delete by giving movement");
+-    commandHelp("r[char]", "replaces character below cursor");
+-    commandHelp("0, $", "move to start/end of line");
+-    commandHelp("o, O", "add new line");
+-    commandHelp("%", "Goto corresponding parentheses");
++    addCommandHelp(insertMode, "Esc", "zmień na tryb zwykły (NORMAL)");
++    commandHelp("i, I", "zmień na tryb wstawiania (INSERT)");
++    commandHelp("h, j, k, l", "przesuń w lewo, w dół, w górę, w prawo");
++    commandHelp("w, b, e, ge", "poruszaj się słowo po słowie");
++    commandHelp("[n][akcja/ruch]", "wykonaj n razy, np. 3w");
++    commandHelp("x, X", "usuń znak");
++    commandHelp("a, A", "dopisz");
++    commandHelp("f[znak]", "przejdź do następnego podanego znaku w wierszu");
++    commandHelp("F[znak]", "przejdź do poprzedniego podanego znaku w wierszu");
++    commandHelp("; and ,", "powtórz ostatnie f lub F");
++    commandHelp("f[znak]", "przejdź do następnego n-tego podanego znaku w linii", "number_f_char");
++    commandHelp("/twojtekst a następnie: n, N", "Wyszukaj tekst");
++    commandHelp("d[ruch]", "usuń poprzez poruszanie kursorem");
++    commandHelp("r[znak]", "zamień znak pod kursorem");
++    commandHelp("0, $", "przejdź do początku/końca linii");
++    commandHelp("o, O", "dodaj nową linię");
++    commandHelp("%", "przejdź do odpowiadających sobie nawiasów");
+ //    commandHelp("[( or ])", "Goto next/previous parentheses");
+-    commandHelp("ci[movement]", "change inside of given movement");
+-    commandHelp("D", "delete to end of line");
+-    commandHelp("S", "clear current line; to insert mode");
+-    commandHelp("g", "move to the start of buffer", "g");
+-    commandHelp("e", "move to end of previous word", "ge");
+-    commandHelp("gg / G", "move to start / end of buffer");
+-    commandHelp("G or [number]G", "move to line", "goto_line_g");
+-    commandHelp("d", "the whole line", "dd");
+-    commandHelp("$", "the rest of the line", "end_of_line");
+-    commandHelp("0", "the beginning of line to here", "start_of_line");
+-    commandHelp("w", "to the beginning of next word", "w");
+-    commandHelp("e", "to the end of current word", "e");
+-    commandHelp("b", "to the beginning of current word", "b");
+-    commandHelp("h, j, k, l", "left, down, up, right", "hjkl");
+-    commandHelp("[n][movement]", "movement n times", "num_movement");
+-    commandHelp("[char]", "single character", "char");
+-    commandHelp("[movement]", "movement, e.g. j", "movement");
+-    commandHelp("yy", "copy current line");
+-    commandHelp("y", "copy current line", "copy_line");
+-    commandHelp("p", "Paste copied text after cursor.");
+-    commandHelp("i[YourText]", "Repeats inserted text", "repeat_insert");
+-    commandHelp("ESC", "cancel action/movement", "chained"); 
++    commandHelp("ci[ruch]", "zmień w obrębie danego ruchu");
++    commandHelp("D", "usuń do końca wiersza");
++    commandHelp("S", "wyczyść bieżący wiersz; przejdź do trybu wstawiania");
++    commandHelp("g", "przejdź na początek bufora", "g");
++    commandHelp("e", "przejdź na koniec poprzedniego słowa", "ge");
++    commandHelp("gg / G", "przejdź na początek / koniec bufora");
++    commandHelp("G or [liczba]G", "przejdź do linii", "goto_line_g");
++    commandHelp("d", "całą linię", "dd");
++    commandHelp("$", "pozostałą część linii", "end_of_line");
++    commandHelp("0", "od początku linii do tego miejsca", "start_of_line");
++    commandHelp("w", "do początku następnego wyrazu", "w");
++    commandHelp("e", "do końca bieżącego wyrazu", "e");
++    commandHelp("b", "do początku bieżącego wyrazu", "b");
++    commandHelp("h, j, k, l", "lefo, dół, góra, prawo", "hjkl");
++    commandHelp("[n][ruch]", "porusz się n razy", "num_movement");
++    commandHelp("[znak]", "pojedynczy znak", "char");
++    commandHelp("[ruch]", "ruch, np. j", "movement");
++    commandHelp("yy", "skopiuj bieżącą linię");
++    commandHelp("y", "skopiuj bieżącą linię", "copy_line");
++    commandHelp("p", "wklej skopiowany tekst za kursorem");
++    commandHelp("i[TwojTekst]", "powtórz wprowadzony tekst", "repeat_insert");
++    commandHelp("ESC", "anuluj akcję/ruch", "chained"); 
+     show_help();
+ 	}
+ 
+diff -ur en/js/view/view-pl.js pl/js/view/view-pl.js
+--- en/js/view/view-pl.js	2022-06-24 19:17:40.760738700 +0200
++++ pl/js/view/view-pl.js	2022-06-24 19:41:38.827236800 +0200
+@@ -20,13 +20,13 @@
+ 
+   function update() {
+     if(environment.isCommandMode()) {
+-      $('.statustext', context).text("mode: NORMAL");
++      $('.statustext', context).text("tryb: NORMAL");
+       $('.insert-mode', context).hide();
+       $('.command-mode', context).show();
+     } else {
+       $('.insert-mode', context).show();
+       $('.command-mode', context).hide();
+-      $('.statustext', context).text("mode: INSERT");
++      $('.statustext', context).text("tryb: INSERT (WPROWDZANIE)");
+     }
+ 
+     var row = 1 + executor.currentRowIndex();
+diff -ur en/js/virtual_keyboard-pl.js pl/js/virtual_keyboard-pl.js
+--- en/js/virtual_keyboard-pl.js	2022-06-24 19:17:40.760738700 +0200
++++ pl/js/virtual_keyboard-pl.js	2022-06-24 19:34:54.458404900 +0200
+@@ -31,9 +31,9 @@
+    // TODO setKeyLayout to a separate file that returns properties for each keyboard layout
+   function setKeyLayout() {
+     escRow = ["Esc", 'hid', 'hid', 'hid', 'hid', 'hid', 'hid',
+-      configurationKey('3d', 'toggle_3d_keyboard'),
+-      configurationKey('Screen brightness', 'toggle_screen_brightness'),
+-      configurationKey('Keyboard size', 'toggle_keyboard_size') ];
++      configurationKey('3D', 'toggle_3d_keyboard'),
++      configurationKey('Jasność ekranu', 'toggle_screen_brightness'),
++      configurationKey('Rozmiar klaw.', 'toggle_keyboard_size') ];
+     numberRow = ['hid', two('1', '!'), two('2', '"'),
+       two('3', '#'), two('4', '$'), two('5', '%'),
+       two('6', '&'), two('7', '/'), two('8', '('),
+diff -ur en/sandbox-pl.html pl/sandbox-pl.html
+--- en/sandbox-pl.html	2022-06-24 19:17:40.776376200 +0200
++++ pl/sandbox-pl.html	2022-06-24 19:42:03.567543600 +0200
+@@ -1,12 +1,12 @@
+ <!doctype html>
+ 
+-<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
++<html lang='pl' xmlns='http://www.w3.org/1999/xhtml'>
+ <head>
+   <meta charset='utf-8' />
+   <link rel="stylesheet" type="text/css" href="css/css.css?version={VERSION}" />
+   <link rel="icon" type="image/png" href="icon.png"/>
+ 
+-  <title>Interactive Vim tutorial - sandbox</title>
++  <title>Interaktywny samouczek Vim - piaskownica</title>
+ 
+   <!-- GENERAL (mostly) -->
+   <!--
+@@ -17,12 +17,12 @@
+   <script type="text/Javascript" src="js/engine/generic.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/engine/document.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/view/comparison.js?version={VERSION}"></script>
+-  <script type="text/Javascript" src="js/view/context_help.js?version={VERSION}"></script>
++  <script type="text/Javascript" src="js/view/context_help-pl.js?version={VERSION}"></script>
+ 
+   <!-- VIM specific parts -->
+   <script type="text/Javascript" src="js/engine/executor.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/engine/interpreter.js?version={VERSION}"></script>
+-  <script type="text/Javascript" src="js/view/view.js?version={VERSION}"></script>
++  <script type="text/Javascript" src="js/view/view-pl.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/commands/searchcommands.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/commands/visualcommands.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/commands/visualblockcommands.js?version={VERSION}"></script>
+@@ -43,9 +43,9 @@
+ 
+ <body>
+   <div class="navigation">
+-    <a href="tutorial.html">Tutorial</a>
+-    <a href="sandbox.html" class="selected">Practice</a>
+-    <a href="sandbox-pl.html">&#127477;&#127473;</a>
++    <a href="tutorial-pl.html">Samouczek</a>
++    <a href="sandbox-pl.html" class="selected">Trening</a>
++    <a href="sandbox.html">&#127468;&#127463;</a>
+     <!--
+     <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.openvim.com/sandbox.html" data-text="OpenVim - Interactive Vim sandbox" data-count="horizontal" data-via="egaga">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+     -->
+@@ -53,7 +53,7 @@
+   </div>
+ 
+   <div style="margin-left: 15px">
+-      <p>Here you can practice Vim with context-aware help menu. <br>e.g. if you press 'd', you see that the list on the right changes: it will show (some of the) Vim command combinations that start with 'd'.</p>
++      <p>Tutaj możesz przećwiczyć pracę z Vimem z kontekstowym menu pomocy.<br>Np. jeśli naciśniesz 'd', zobaczysz, że lista po prawej stronie się zmieni, tj. pokaże (niektóre) kombinacje poleceń Vima zaczynające się od 'd'.</p>
+   </div>
+ 
+   <div class="screen_view active_context">
+@@ -64,19 +64,19 @@
+             <div style="clear: both;"></div>
+         </div>
+         <div class="text editor">
+-            Now it is plain that everything which is a subject of praise is praised for being of a certain kind and bearing a certain relation to something else:!LINE_BREAK!for instance, the just, and the valiant, and generally the good man, and virtue itself, we praise because of the actions and the results: and the strong man, !LINE_BREAK!and the quick runner, and so forth, we praise for being of a certain nature and bearing a certain relation to something good and excellent (and this is illustrated by attempts to praise the gods;!LINE_BREAK!for they are presented in a ludicrous aspect by being referred to our standard, and this results from the fact, that all!LINE_BREAK!&ndash; Aristotle
++          Zatem wydaje sie, ze kazda rzecz godna pochwaly doznaje jej, poniewaz posiada pewne wlasciwosci i pozostaje w pewnym stosunku do czegos innego;!LINE_BREAK!chwalimy bowiem czlowieka sprawiedliwego i meznego, i w ogole etycznie dzielnego - tak jak i owa dzielnosc - z powodu ich postepowania i czynow; chwalimy silacza!LINE_BREAK!i szybkobiegacza, i wszystkich innych, poniewaz posiadaja pewne wrodzone wlasciwosci i pozostaja w pewnym stosunku do czegos, co dobre i wartosciowe. Wynika to tez z pochwal dotyczacych bogow,!LINE_BREAK!wydaja sie bowiem smieszni, kiedy sie ich porownuje z nami, a dzieje sie to dlatego, ze!LINE_BREAK!&ndash; Arystoteles
+         </div>
+         <div class="searchbar">
+           <span class="searchPrefix">/</span>
+           <span class="searchText"></span>
+-          <span class="searchHelp">&lt;Enter to find&gt;</span>
++          <span class="searchHelp">&lt;Wprowadź, aby znaleźć&gt;</span>
+ 	</div>
+ 
+         <div style="clear: both;"></div>
+     </div>
+ 
+     <div class="sidebar">
+-        <h4>Context-Aware Actions</h4>
++        <h4>Akcje kontekstowe</h4>
+         <h4 class="context_pressed"></h4>
+         <p class="command-mode"></p>
+         <p class="insert-mode"></p>
+diff -ur en/tutorial-pl.html pl/tutorial-pl.html
+--- en/tutorial-pl.html	2022-06-24 19:17:40.792004100 +0200
++++ pl/tutorial-pl.html	2022-06-24 19:42:07.156457400 +0200
+@@ -1,6 +1,6 @@
+ <!doctype html>
+ 
+-<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
++<html lang='pl' xmlns='http://www.w3.org/1999/xhtml'>
+ 
+ <head>
+   <meta charset='utf-8' />
+@@ -10,7 +10,7 @@
+   <link rel="stylesheet" type="text/css" href="css/virtual_keyboard.css?version={VERSION}" />
+   <link rel="icon" type="image/png" href="icon.png" />
+ 
+-  <title>Interactive Vim tutorial</title>
++  <title>Interaktywny samouczek Vim</title>
+ 
+   <!-- GENERAL (mostly) -->
+   <script type="text/Javascript" src="js/engine/messager.js?version={VERSION}"></script>
+@@ -18,12 +18,12 @@
+   <script type="text/Javascript" src="js/engine/generic.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/engine/document.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/view/comparison.js?version={VERSION}"></script>
+-  <script type="text/Javascript" src="js/view/context_help.js?version={VERSION}"></script>
++  <script type="text/Javascript" src="js/view/context_help-pl.js?version={VERSION}"></script>
+ 
+   <!-- VIM specific parts -->
+   <script type="text/Javascript" src="js/engine/executor.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/engine/interpreter.js?version={VERSION}"></script>
+-  <script type="text/Javascript" src="js/view/view.js?version={VERSION}"></script>
++  <script type="text/Javascript" src="js/view/view-pl.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/commands/searchcommands.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/commands/visualcommands.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/commands/visualblockcommands.js?version={VERSION}"></script>
+@@ -31,8 +31,8 @@
+   <script type="text/Javascript" src="js/commands/commands.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/view/event.js?version={VERSION}"></script>
+   <script type="text/Javascript" src="js/tutorial/tutorial_engine.js?version={VERSION}"></script>
+-  <script type="text/Javascript" src="js/tutorial/sections.js?version={VERSION}"></script>
+-  <script type="text/Javascript" src="js/virtual_keyboard.js?version={VERSION}"></script>
++  <script type="text/Javascript" src="js/tutorial/sections-pl.js?version={VERSION}"></script>
++  <script type="text/Javascript" src="js/virtual_keyboard-pl.js?version={VERSION}"></script>
+ 
+   <script type="text/Javascript" src="js/tutorial/init_tutorial.js?version={VERSION}"></script>
+ 
+@@ -60,9 +60,9 @@
+ 
+     <div class="navigation">
+       <span style="font-size:25px; cursor:pointer; color: white; margin: 0 10px;" onclick="openNav()">&#9776;</span>
+-      <a href="tutorial.html" class="selected">Tutorial</a>
+-      <a href="sandbox.html">Practice</a>
+-      <a href="tutorial-pl.html">&#127477;&#127473;</a>
++      <a href="tutorial-pl.html" class="selected">Samouczek</a>
++      <a href="sandbox-pl.html">Trening</a>
++      <a href="tutorial.html">&#127468;&#127463;</a>
+ 
+       <!--
+     <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.openvim.com/tutorial.html" data-text="OpenVim - Interactive Vim tutorial" data-count="horizontal" data-via="egaga">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+@@ -86,7 +86,7 @@
+         <div class="searchbar">
+           <span class="searchPrefix">/</span>
+           <span class="searchText"></span>
+-          <span class="searchHelp">&lt;Enter to find&gt;</span>
++          <span class="searchHelp">&lt;Wprowadź, aby znaleźć&gt;</span>
+         </div>
+ 
+         <div style="clear: both;"></div>
+@@ -94,15 +94,14 @@
+ 
+       <div style="clear: both;"></div>
+       <div class="keyboard_wrapper">
+-        <p class="keyboard_description">Virtual keyboard (shows keys you need to press on your physical keyboard; not
+-          clickable)</p>
++        <p class="keyboard_description">Klawiatura wirtualna (pokazuje klawisze, które należy nacisnąć na klawiaturze fizycznej; nie jest klikalna)</p>
+       </div>
+     </div>
+ 
+   </div>
+   <div class="section_menu" id="mySidenav">
+ 
+-    <div class="headline">Sections</div>
++    <div class="headline">Sekcje</div>
+     <a  href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+ 
+     <div class="section_menu_append_target" style="clear: both;"></div>
