@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html lang='pl' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <meta charset='utf-8' />
+  <link rel="stylesheet" type="text/css" href="css/css.css?version=ebed35039edb31bcd74284d32349251f50b0b988" />
+  <link rel="icon" type="image/png" href="icon.png"/>
+
+  <title>Interaktywny samouczek Vim - piaskownica</title>
+
+  <!-- GENERAL (mostly) -->
+  <!--
+  <script type="text/Javascript" src="js/jquery.js"></script>
+  -->
+  <script type="text/Javascript" src="js/engine/messager.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/blinking.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/engine/generic.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/engine/document.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/comparison.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/context_help-pl.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+
+  <!-- VIM specific parts -->
+  <script type="text/Javascript" src="js/engine/executor.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/engine/interpreter.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/view-pl.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/searchcommands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/visualcommands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/visualblockcommands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/timescommands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/commands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/event.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/init.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load("jquery", "1.6.4");
+
+    google.setOnLoadCallback(function() {
+        init_vim();
+    });
+  </script>
+</head>
+
+<body>
+  <div class="navigation">
+    <a href="tutorial-pl.html">Samouczek</a>
+    <a href="sandbox-pl.html" class="selected">Trening</a>
+    <a href="sandbox.html">&#127468;&#127463;</a>
+    <!--
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.openvim.com/sandbox.html" data-text="OpenVim - Interactive Vim sandbox" data-count="horizontal" data-via="egaga">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    -->
+    <!-- <a class="bug_or_request" href="https://github.com/egaga/openvim/issues/new">Bugs</a> -->
+  </div>
+
+  <div style="margin-left: 15px">
+      <p>Tutaj możesz przećwiczyć pracę z Vimem z kontekstowym menu pomocy.<br>Np. jeśli naciśniesz 'd', zobaczysz, że lista po prawej stronie się zmieni, tj. pokaże (niektóre) kombinacje poleceń Vima zaczynające się od 'd'.</p>
+  </div>
+
+  <div class="screen_view active_context">
+    <div class="content">
+        <div class="statusbar">
+            <div class="statustext"></div>
+            <div class="cursorlocation"></div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="text editor">
+          Zatem wydaje sie, ze kazda rzecz godna pochwaly doznaje jej, poniewaz posiada pewne wlasciwosci i pozostaje w pewnym stosunku do czegos innego;!LINE_BREAK!chwalimy bowiem czlowieka sprawiedliwego i meznego, i w ogole etycznie dzielnego - tak jak i owa dzielnosc - z powodu ich postepowania i czynow; chwalimy silacza!LINE_BREAK!i szybkobiegacza, i wszystkich innych, poniewaz posiadaja pewne wrodzone wlasciwosci i pozostaja w pewnym stosunku do czegos, co dobre i wartosciowe. Wynika to tez z pochwal dotyczacych bogow,!LINE_BREAK!wydaja sie bowiem smieszni, kiedy sie ich porownuje z nami, a dzieje sie to dlatego, ze!LINE_BREAK!&ndash; Arystoteles
+        </div>
+        <div class="searchbar">
+          <span class="searchPrefix">/</span>
+          <span class="searchText"></span>
+          <span class="searchHelp">&lt;Wprowadź, aby znaleźć&gt;</span>
+	</div>
+
+        <div style="clear: both;"></div>
+    </div>
+
+    <div class="sidebar">
+        <h4>Akcje kontekstowe</h4>
+        <h4 class="context_pressed"></h4>
+        <p class="command-mode"></p>
+        <p class="insert-mode"></p>
+    </div>
+
+    <div style="clear: both;"></div>
+  </div>
+</body>
+</html>

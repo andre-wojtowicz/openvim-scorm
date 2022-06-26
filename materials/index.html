@@ -1,0 +1,19 @@
+<!doctype html>
+
+<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <meta charset='utf-8' />
+  <title>Interactive Vim tutorial</title>
+  <script type="text/Javascript">
+    var lang = navigator.language || navigator.browserLanguage;
+    if (lang != null && typeof lang == "string" && lang.toLowerCase().startsWith("pl"))
+    {
+        window.location.replace("tutorial-pl.html");
+    } else {
+        window.location.replace("tutorial.html");
+    }
+
+  </script>
+</head>
+<body></body>
+</html>

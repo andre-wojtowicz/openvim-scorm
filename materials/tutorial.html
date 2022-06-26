@@ -1,0 +1,123 @@
+<!doctype html>
+
+<html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+
+<head>
+  <meta charset='utf-8' />
+  <script src="js/scorm.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="css/css.css?version=ebed35039edb31bcd74284d32349251f50b0b988" />
+  <link rel="stylesheet" type="text/css" href="css/tutorial.css?version=ebed35039edb31bcd74284d32349251f50b0b988" />
+  <link rel="stylesheet" type="text/css" href="css/virtual_keyboard.css?version=ebed35039edb31bcd74284d32349251f50b0b988" />
+  <link rel="icon" type="image/png" href="icon.png" />
+
+  <title>Interactive Vim tutorial</title>
+
+  <!-- GENERAL (mostly) -->
+  <script type="text/Javascript" src="js/engine/messager.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/blinking.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/engine/generic.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/engine/document.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/comparison.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/context_help.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+
+  <!-- VIM specific parts -->
+  <script type="text/Javascript" src="js/engine/executor.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/engine/interpreter.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/view.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/searchcommands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/visualcommands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/visualblockcommands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/timescommands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/commands/commands.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/view/event.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/tutorial/tutorial_engine.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/tutorial/sections.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+  <script type="text/Javascript" src="js/virtual_keyboard.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+
+  <script type="text/Javascript" src="js/tutorial/init_tutorial.js?version=ebed35039edb31bcd74284d32349251f50b0b988"></script>
+
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load("jquery", "1.6.4");
+    
+    ScormProcessInitialize();
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    google.setOnLoadCallback(function () {
+      if (urlParams.has('layout')) {
+        init_tutorial(urlParams.get('layout'));
+      } else {
+        init_tutorial();
+      }
+    });
+  </script>
+
+</head>
+
+<body onload="openNav();" onbeforeunload="ScormProcessTerminate();" onunload="ScormProcessTerminate();">
+  <div id="main">
+
+    <div class="navigation">
+      <span style="font-size:25px; cursor:pointer; color: white; margin: 0 10px;" onclick="openNav()">&#9776;</span>
+      <a href="tutorial.html" class="selected">Tutorial</a>
+      <a href="sandbox.html">Practice</a>
+      <a href="tutorial-pl.html">&#127477;&#127473;</a>
+
+      <!--
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.openvim.com/tutorial.html" data-text="OpenVim - Interactive Vim tutorial" data-count="horizontal" data-via="egaga">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    -->
+      <!-- <a class="bug_or_request" href="https://github.com/egaga/openvim/issues/new">Bugs</a> -->
+    </div>
+
+    <div class="screen_view">
+      <div class="content">
+        <h3 class="title"></h3>
+        <h3 class="info"></h3>
+
+        <div class="statusbar">
+          <div class="statustext"></div>
+          <div class="cursorlocation"></div>
+          <div style="clear: both;"></div>
+        </div>
+
+        <div class="text editor"></div>
+
+        <div class="searchbar">
+          <span class="searchPrefix">/</span>
+          <span class="searchText"></span>
+          <span class="searchHelp">&lt;Enter to find&gt;</span>
+        </div>
+
+        <div style="clear: both;"></div>
+      </div>
+
+      <div style="clear: both;"></div>
+      <div class="keyboard_wrapper">
+        <p class="keyboard_description">Virtual keyboard (shows keys you need to press on your physical keyboard; not
+          clickable)</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="section_menu" id="mySidenav">
+
+    <div class="headline">Sections</div>
+    <a  href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <div class="section_menu_append_target" style="clear: both;"></div>
+  </div>
+</body>
+<script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "340px";
+    document.getElementById("main").style.marginLeft = "340px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+  }
+</script>
+
+</html>
