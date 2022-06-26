@@ -43,7 +43,7 @@ jobs:
         rm -rf materials imsmanifest.xml
         unzip dist/*.zip -d .
         rm -rf dist
-        if [[ $(git status --porcelain) ]];
+        if [[ $(git status --porcelain) ]]; then
           git config --global user.name 'Git bot'
           git config --global user.email 'bot@noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
