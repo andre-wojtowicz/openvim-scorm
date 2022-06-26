@@ -26,7 +26,7 @@ function create_VIM_CONTEXT_HELP(context) {
     var insertMode = $('.insert-mode', context);
     
     addCommandHelp(insertMode, "Esc", "zmień na tryb zwykły (NORMAL)");
-    commandHelp("i, I", "zmień na tryb wstawiania (INSERT)");
+    commandHelp("i, I", "zmień na tryb wprowadzania (INSERT)");
     commandHelp("h, j, k, l", "przesuń w lewo, w dół, w górę, w prawo");
     commandHelp("w, b, e, ge", "poruszaj się słowo po słowie");
     commandHelp("[n][akcja/ruch]", "wykonaj n razy, np. 3w");
@@ -45,7 +45,7 @@ function create_VIM_CONTEXT_HELP(context) {
 //    commandHelp("[( or ])", "Goto next/previous parentheses");
     commandHelp("ci[ruch]", "zmień w obrębie danego ruchu");
     commandHelp("D", "usuń do końca wiersza");
-    commandHelp("S", "wyczyść bieżący wiersz; przejdź do trybu wstawiania");
+    commandHelp("S", "wyczyść bieżący wiersz; przejdź do trybu wprowadzania");
     commandHelp("g", "przejdź na początek bufora", "g");
     commandHelp("e", "przejdź na koniec poprzedniego słowa", "ge");
     commandHelp("gg / G", "przejdź na początek / koniec bufora");

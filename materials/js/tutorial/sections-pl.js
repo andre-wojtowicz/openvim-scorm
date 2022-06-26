@@ -110,7 +110,7 @@ function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, re
         "Drugi tryb to |NORMAL| (zwykły), który zapewnia efektywne sposoby nawigacji i manipulacji tekstem.",
         "W każdej chwili możesz sprawdzić, w którym trybie jesteś, patrząc na pasek stanu znajdującym ię w górnej części edytora.",
         "Aby przełączać się między trybami, użyj |Esc| dla trybu NORMAL oraz |i| dla trybu INSERT.",
-        "Sprawdźmy, jak to działa! Najpierw przejdź do trybu wstawiania."
+        "Sprawdźmy, jak to działa! Najpierw przejdź do trybu wprowadzania."
     ],
     function() {
         interpreter.environment.setCommandMode();
@@ -118,7 +118,7 @@ function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, re
             [
              cmd("i", function() {
                $('.screen_view').addClass('active_context');
-               insertText("Świetnie, teraz jesteś w trybie wstawiania. Napisz coś i wróć do trybu zwykłego.");
+               insertText("Świetnie, teraz jesteś w trybie wprowadzania. Napisz coś i wróć do trybu zwykłego.");
              }),
              cmd("Esc", function() {
                $('.screen_view').removeClass('active_context');
@@ -315,7 +315,7 @@ function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, re
     var replacing = createSection("Zastąp literę pod kursorem, r",
         defaultPre,
       [
-      "Jeśli chcesz zastąpić tylko jeden znak pod kursorem, bez przechodzenia do trybu wstawiania, użyj |r|.",
+      "Jeśli chcesz zastąpić tylko jeden znak pod kursorem, bez przechodzenia do trybu wprowadzania, użyj |r|.",
       "Zastąp mniy"
       ], function() {
         interpreter.environment.setCommandMode();
@@ -406,7 +406,7 @@ function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, re
   var visual_mode = createSection("Tryb wizualny, v",
     defaultPre,
     [
-      "Oprócz trybu wstawiania i trybu normalnego, Vim posiada również tryb |VISUAL| (wizualny).",
+      "Oprócz trybu wprowadzania i trybu normalnego, Vim posiada również tryb |VISUAL| (wizualny).",
       "W trybie wizualnym, najpierw zaznaczasz tekst za pomocą klawiszy ruchu, zanim zdecydujesz co z nim zrobić.",
       "Sprawdźmy, jak to zrobić. Przejdź do trybu wizualnego za pomocą |v|. Następnie zaznacz słowo za pomocą |e|. Po zaznaczeniu tekstu możesz go usunąć, używając klawisza |d|.",
       "To zdanie nie ujrzało światła dziennego."
@@ -423,11 +423,11 @@ function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, re
   var visual_block_mode = createSection("Wizualny tryb blokowy, ctrl-v",
     defaultPre,
     [
-      "Istnieje jeszcze jeden tryb: |VISUAL BLOCK| (wizualny tryb blokowy). Umożliwia on wstawianie tekstu w wielu wierszach jednocześnie. Zobaczmy, jak to zrobić na przykładzie listy.",
+      "Istnieje jeszcze jeden tryb: |VISUAL BLOCK| (wizualny tryb blokowy). Umożliwia on wprowadzanie tekstu w wielu wierszach jednocześnie. Zobaczmy, jak to zrobić na przykładzie listy.",
       "<> Bystra dziewczyna",
       "<> Ulisses",
       "<> Ucz się i nauczaj",
-      "Najpierw przesuń kursor na pozycję wstawiania. Następnie naciśnij |ctrl-v|, aby przejść do trybu bloku wizualnego. Przesuń kursor w pionie, aby zaznaczyć linie. Teraz naciśnij |I| i wstaw tekst do zaznaczonego obszaru. |Esc| kończy wstawianie."
+      "Najpierw przesuń kursor na pozycję wstawiania. Następnie naciśnij |ctrl-v|, aby przejść do trybu bloku wizualnego. Przesuń kursor w pionie, aby zaznaczyć linie. Teraz naciśnij |I| i wstaw tekst do zaznaczonego obszaru. |Esc| kończy wprowadzanie."
     ],
     function() {
       interpreter.environment.setCommandMode();
@@ -441,7 +441,7 @@ function register_VIM_TUTORIAL_SECTIONS(interpreter, messager, createSection, re
         defaultPre,
     [
         "Teraz powinieneś móc wejść na pewniaczku do prawdziwego Vima.",
-        "Najważniejsze polecenia, które powinieneś zapamiętać, to |:w| (zapisz), |:q| (zakończ) i |:q!| (zakończ bez zapisywania).",
+        "Najważniejsze polecenia, które powinieneś zapamiętać, to |:o nazwa_pliku| (otwórz plik), |:w| (zapisz), |:q| (zakończ) i |:q!| (zakończ bez zapisywania).",
         "Ponadto, nie |PANIKUJ!| Jeśli popełnisz błąd, naciśnij |u| aby cofnąć polecenie i |ctrl+R| aby ponowić polecenie.",
         "Jeśli masz jakiś problem lub chcesz dowiedzieć się więcej o możliwościach Vima, wpisz |:help|."
     ],
