@@ -79,7 +79,7 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
 +        "Drugi tryb to |NORMAL| (zwykły), który zapewnia efektywne sposoby nawigacji i manipulacji tekstem.",
 +        "W każdej chwili możesz sprawdzić, w którym trybie jesteś, patrząc na pasek stanu znajdującym ię w górnej części edytora.",
 +        "Aby przełączać się między trybami, użyj |Esc| dla trybu NORMAL oraz |i| dla trybu INSERT.",
-+        "Sprawdźmy, jak to działa! Najpierw przejdź do trybu wstawiania."
++        "Sprawdźmy, jak to działa! Najpierw przejdź do trybu wprowadzania."
      ],
      function() {
          interpreter.environment.setCommandMode();
@@ -88,7 +88,7 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
               cmd("i", function() {
                 $('.screen_view').addClass('active_context');
 -               insertText("Good, now you're in insert mode. Write something and change back to normal mode.");
-+               insertText("Świetnie, teraz jesteś w trybie wstawiania. Napisz coś i wróć do trybu zwykłego.");
++               insertText("Świetnie, teraz jesteś w trybie wprowadzania. Napisz coś i wróć do trybu zwykłego.");
               }),
               cmd("Esc", function() {
                 $('.screen_view').removeClass('active_context');
@@ -334,7 +334,7 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
        [
 -      "When you need to replace only one character under your cursor, without changing to insert mode, use |r|.",
 -      "Replace my"
-+      "Jeśli chcesz zastąpić tylko jeden znak pod kursorem, bez przechodzenia do trybu wstawiania, użyj |r|.",
++      "Jeśli chcesz zastąpić tylko jeden znak pod kursorem, bez przechodzenia do trybu wprowadzania, użyj |r|.",
 +      "Zastąp mniy"
        ], function() {
          interpreter.environment.setCommandMode();
@@ -434,7 +434,7 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
 -      "In visual mode, you select text using movement keys before you decide what to do with it.",
 -      "Let's see how. Goto visual mode with |v|. Then select a word with |e|. After you've selected the text, you can delete it with |d|.",
 -      "This sentence has not seen the light."
-+      "Oprócz trybu wstawiania i trybu normalnego, Vim posiada również tryb |VISUAL| (wizualny).",
++      "Oprócz trybu wprowadzania i trybu normalnego, Vim posiada również tryb |VISUAL| (wizualny).",
 +      "W trybie wizualnym, najpierw zaznaczasz tekst za pomocą klawiszy ruchu, zanim zdecydujesz co z nim zrobić.",
 +      "Sprawdźmy, jak to zrobić. Przejdź do trybu wizualnego za pomocą |v|. Następnie zaznacz słowo za pomocą |e|. Po zaznaczeniu tekstu możesz go usunąć, używając klawisza |d|.",
 +      "To zdanie nie ujrzało światła dziennego."
@@ -458,11 +458,11 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
 -      "<> Ulysses",
 -      "<> Learn and teach",
 -      "First, move cursor to insert position. Then press |ctrl-v| to go into visual block mode. Move cursor vertically to select lines. Now press |I|, and prepend text to the selected area. |Esc| completes the insertion."
-+      "Istnieje jeszcze jeden tryb: |VISUAL BLOCK| (wizualny tryb blokowy). Umożliwia on wstawianie tekstu w wielu wierszach jednocześnie. Zobaczmy, jak to zrobić na przykładzie listy.",
++      "Istnieje jeszcze jeden tryb: |VISUAL BLOCK| (wizualny tryb blokowy). Umożliwia on wprowadzanie tekstu w wielu wierszach jednocześnie. Zobaczmy, jak to zrobić na przykładzie listy.",
 +      "<> Bystra dziewczyna",
 +      "<> Ulisses",
 +      "<> Ucz się i nauczaj",
-+      "Najpierw przesuń kursor na pozycję wstawiania. Następnie naciśnij |ctrl-v|, aby przejść do trybu bloku wizualnego. Przesuń kursor w pionie, aby zaznaczyć linie. Teraz naciśnij |I| i wstaw tekst do zaznaczonego obszaru. |Esc| kończy wstawianie."
++      "Najpierw przesuń kursor na pozycję wstawiania. Następnie naciśnij |ctrl-v|, aby przejść do trybu bloku wizualnego. Przesuń kursor w pionie, aby zaznaczyć linie. Teraz naciśnij |I| i wstaw tekst do zaznaczonego obszaru. |Esc| kończy wprowadzanie."
      ],
      function() {
        interpreter.environment.setCommandMode();
@@ -482,7 +482,7 @@ diff -ur en/js/tutorial/sections-pl.js pl/js/tutorial/sections-pl.js
 -        "Also don't |PANIC!| If you make a mistake, press |u| for undo and |ctrl+R| for redo",
 -        "If you have a problem, or want to learn more about what Vim offers, type |:help|"
 +        "Teraz powinieneś móc wejść na pewniaczku do prawdziwego Vima.",
-+        "Najważniejsze polecenia, które powinieneś zapamiętać, to |:w| (zapisz), |:q| (zakończ) i |:q!| (zakończ bez zapisywania).",
++        "Najważniejsze polecenia, które powinieneś zapamiętać, to |:o nazwa_pliku| (otwórz plik), |:w| (zapisz), |:q| (zakończ) i |:q!| (zakończ bez zapisywania).",
 +        "Ponadto, nie |PANIKUJ!| Jeśli popełnisz błąd, naciśnij |u| aby cofnąć polecenie i |ctrl+R| aby ponowić polecenie.",
 +        "Jeśli masz jakiś problem lub chcesz dowiedzieć się więcej o możliwościach Vima, wpisz |:help|."
      ],
@@ -526,7 +526,7 @@ diff -ur en/js/view/context_help-pl.js pl/js/view/context_help-pl.js
 -    commandHelp("o, O", "add new line");
 -    commandHelp("%", "Goto corresponding parentheses");
 +    addCommandHelp(insertMode, "Esc", "zmień na tryb zwykły (NORMAL)");
-+    commandHelp("i, I", "zmień na tryb wstawiania (INSERT)");
++    commandHelp("i, I", "zmień na tryb wprowadzania (INSERT)");
 +    commandHelp("h, j, k, l", "przesuń w lewo, w dół, w górę, w prawo");
 +    commandHelp("w, b, e, ge", "poruszaj się słowo po słowie");
 +    commandHelp("[n][akcja/ruch]", "wykonaj n razy, np. 3w");
@@ -567,7 +567,7 @@ diff -ur en/js/view/context_help-pl.js pl/js/view/context_help-pl.js
 -    commandHelp("ESC", "cancel action/movement", "chained"); 
 +    commandHelp("ci[ruch]", "zmień w obrębie danego ruchu");
 +    commandHelp("D", "usuń do końca wiersza");
-+    commandHelp("S", "wyczyść bieżący wiersz; przejdź do trybu wstawiania");
++    commandHelp("S", "wyczyść bieżący wiersz; przejdź do trybu wprowadzania");
 +    commandHelp("g", "przejdź na początek bufora", "g");
 +    commandHelp("e", "przejdź na koniec poprzedniego słowa", "ge");
 +    commandHelp("gg / G", "przejdź na początek / koniec bufora");
