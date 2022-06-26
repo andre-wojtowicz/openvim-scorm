@@ -36,7 +36,7 @@ function create_VIM_CONTEXT_HELP(context) {
     commandHelp("F[znak]", "przejdź do poprzedniego podanego znaku w wierszu");
     commandHelp("; and ,", "powtórz ostatnie f lub F");
     commandHelp("f[znak]", "przejdź do następnego n-tego podanego znaku w linii", "number_f_char");
-    commandHelp("/twojtekst a następnie: n, N", "Wyszukaj tekst");
+    commandHelp("/twojtekst a następnie: n, N", "wyszukaj tekst");
     commandHelp("d[ruch]", "usuń poprzez poruszanie kursorem");
     commandHelp("r[znak]", "zamień znak pod kursorem");
     commandHelp("0, $", "przejdź do początku/końca linii");
