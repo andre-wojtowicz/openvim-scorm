@@ -4,6 +4,8 @@ This repository contains scripts to wrap <https://www.openvim.com/> into SCORM 1
 
 The latest automatically built SCORM package can be downloaded from [Releases](https://github.com/andre-wojtowicz/openvim-scorm/releases).
 
+[Live preview](https://andre-wojtowicz.github.io/openvim-scorm/) with simple SCO run-time test environment (click "Launch SCO" in top-left corner).
+
 ## Moodle SCORM activity settings
 
 ```plaintext
